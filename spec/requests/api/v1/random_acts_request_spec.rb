@@ -1,15 +1,14 @@
 require "rails_helper"
 
-RSpec.describe "Random Acts Controller" do 
+RSpec.describe "Random Acts Controller" do
   describe "#index", :vcr do
-    it "returns 3 random activities from the Bored API" do 
-
+    it "returns 3 random activities from the Bored API" do
       get "/api/v1/random_acts"
 
       expect(response).to be_successful
 
       parsed_data = JSON.parse(response.body, symbolize_names: true)
-      
+
       expect(parsed_data).to be_a(Hash)
       expect(parsed_data[:data]).to be_a(Hash)
       expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])

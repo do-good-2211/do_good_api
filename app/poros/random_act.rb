@@ -1,4 +1,4 @@
-class RandomAct 
+class RandomAct
   attr_reader :deed_names, :id
 
   def initialize(deed_names)
