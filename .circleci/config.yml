@@ -1,0 +1,28 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.4.0 
+
+jobs:
+  build:
+    working_directory: ~/do_good_api
+    docker:
+      - image: cimg/ruby:3.1.1
+        environment:
+          PGHOST: localhost
+          PGUSER: do_good_api
+          RAILS_ENV: test
+      - image: postgres:13.2
+        environment:
+          POSTGRES_USER: do_good_api
+          POSTGRES_DB: do_good_api_test
+          POSTGRES_PASSWORD:
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: do_good_api
+          command: bundle -v
+
+      - checkout
+      - run: bundle install --path vendor/bundle
+      - run: bundle exec rspec
