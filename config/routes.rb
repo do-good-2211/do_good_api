@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :random_acts, only: [:index]
+
+      resources :users do 
+        resources :good_deeds, only: [:create]
+      end
     end
   end
 end
