@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/facades/bored_facade.rb
 class BoredFacade
   attr_reader :bored_service
 
@@ -5,7 +8,7 @@ class BoredFacade
     @bored_service = BoredService.new
   end
 
-  def get_3_acts
+  def three_random_acts
     acts_collection = []
     3.times do
       acts_collection << bored_service.fetch_api

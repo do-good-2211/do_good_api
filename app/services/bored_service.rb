@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/services/bored_service.rb
 class BoredService
   def fetch_api
     response = conn.get

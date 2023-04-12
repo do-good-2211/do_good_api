@@ -11,14 +11,14 @@ RSpec.describe BoredFacade do
       end
     end
 
-    context "#get_3_acts" do
+    context "#three_random_acts" do
       it "returns an array of 3 random act objects" do
         bored_facade = BoredFacade.new
 
-        expect(bored_facade.get_3_acts).to be_a(RandomAct)
-        expect(bored_facade.get_3_acts.deed_names).to be_an(Array)
-        expect(bored_facade.get_3_acts.deed_names.count).to eq(3)
-        expect(bored_facade.get_3_acts.deed_names.first).to be_a(String)
+        expect(bored_facade.three_random_acts).to be_a(RandomAct)
+        expect(bored_facade.three_random_acts.deed_names).to be_an(Array)
+        expect(bored_facade.three_random_acts.deed_names.count).to eq(3)
+        expect(bored_facade.three_random_acts.deed_names.first).to be_a(String)
       end
     end
   end
