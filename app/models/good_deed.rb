@@ -8,4 +8,18 @@ class GoodDeed < ApplicationRecord
   validates_presence_of :name, :host_id, :date, :time, :status
 
   enum status: ["In Progress", "Completed"]
+
+
+  def add_participants(all_invitees, host_id)
+    
+    all_participant_ids = all_invitees.map do |invitee|
+      invitee["user_id"]
+    end
+    
+    all_participant_ids << host_id
+
+    all_participant_ids.each do |id|
+      UserGoodDeed.create!(good_deed_id: self.id, user_id: id)
+    end
+  end
 end
