@@ -1,0 +1,129 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.boredapi.com/api/activity?type=charity
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '165'
+      Etag:
+      - W/"a5-w+ZgqMtvGXM2Wy9Wi//Vt41eb+g"
+      Date:
+      - Wed, 12 Apr 2023 03:36:03 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"activity":"Clean out your closet and donate the clothes you''ve outgrown","type":"charity","participants":1,"price":0,"link":"","key":"9026787","accessibility":0.1}'
+  recorded_at: Wed, 12 Apr 2023 03:36:03 GMT
+- request:
+    method: get
+    uri: http://www.boredapi.com/api/activity?type=charity
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '137'
+      Etag:
+      - W/"89-iTb5112HjLnueUZsOyBh9qLsp0Y"
+      Date:
+      - Wed, 12 Apr 2023 03:36:03 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"activity":"Donate to your local food bank","type":"charity","participants":1,"price":0.5,"link":"","key":"4150284","accessibility":0.8}'
+  recorded_at: Wed, 12 Apr 2023 03:36:03 GMT
+- request:
+    method: get
+    uri: http://www.boredapi.com/api/activity?type=charity
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '138'
+      Etag:
+      - W/"8a-l0CqRoswPEwMCZKlnC02wXNXO0U"
+      Date:
+      - Wed, 12 Apr 2023 03:36:04 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"activity":"Find a charity and donate to it","type":"charity","participants":1,"price":0.4,"link":"","key":"1488053","accessibility":0.1}'
+  recorded_at: Wed, 12 Apr 2023 03:36:03 GMT
+recorded_with: VCR 6.1.0
