@@ -8,13 +8,12 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
     if new_good_deed.save!
       GoodDeed.last.add_participants(params[:attendees], params[:user_id].to_i)
       
-      # user = User.find(params[:user_id])
-      # render json: UserSerializer.new(user) #, status: 201
+      # user = User.find(params[:user_id]) & render json: UserSerializer.new(user) #, status: 201
       # render json: status: 201
       
-      render json: GoodDeedSerializer.new(new_good_deed), status: 201
-    else
-      render json: { errors: new_item.errors.full_messages.join(', ') }, status: :bad_request
+      render json: GoodDeedsSerializer.new(new_good_deed), status: 201
+    # else
+    #   render json: { errors: new_item.errors.full_messages.join(', ') }, status: :bad_request
     end
   end
 end
