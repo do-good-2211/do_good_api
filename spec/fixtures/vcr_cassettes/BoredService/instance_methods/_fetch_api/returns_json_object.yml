@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.boredapi.com/api/activity?type=charity
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '177'
+      Etag:
+      - W/"b1-O9K7qx8mdT1VgEB/YYujJQmjNJM"
+      Date:
+      - Wed, 12 Apr 2023 15:09:24 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"activity":"Donate blood at a local blood center","type":"charity","participants":1,"price":0,"link":"https://www.redcross.org/give-blood","key":"6509779","accessibility":0.35}'
+  recorded_at: Wed, 12 Apr 2023 15:09:24 GMT
+recorded_with: VCR 6.1.0
