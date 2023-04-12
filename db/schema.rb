@@ -10,8 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 20_230_412_144_928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "good_deeds", force: :cascade do |t|
+    t.string "name"
+    t.integer "host_id"
+    t.date "date"
+    t.time "time"
+    t.string "notes"
+    t.string "media_link"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_good_deeds", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "good_deed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["good_deed_id"], name: "index_user_good_deeds_on_good_deed_id"
+    t.index ["user_id"], name: "index_user_good_deeds_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.integer "role", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "user_good_deeds", "good_deeds"
+  add_foreign_key "user_good_deeds", "users"
 end
