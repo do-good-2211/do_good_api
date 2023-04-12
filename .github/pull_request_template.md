@@ -4,7 +4,7 @@
 [ ] This change requires a documentation update
 
 ## List of Changes: 
-- <p>This PR is related to this issue: # (issue)</p>
+- This PR is related to this issue: # (issue)
 - 
 
 # Self Review
