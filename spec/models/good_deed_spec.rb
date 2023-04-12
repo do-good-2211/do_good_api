@@ -19,19 +19,31 @@ RSpec.describe GoodDeed, type: :model do
   describe "instance methods" do
     context "#add_participants" do
       before(:each) do
-        @users = create_list(:user, 4)
-        @good_deed1 = create(:good_deed, host_id: @users[0].id)
+        users = create_list(:user, 4)
+        @good_deed1 = create(:good_deed, host_id: users[0].id)
+        @host_id = users[0].id
+        @invitee1 = users[1]
+        @invitee2 = users[2]
       end
 
       it "can create a join table record of all participants of a good deed" do
-        invitee_array = ([{ "user_id"=>@users[1].id }, { "user_id"=>@users[2].id }])
-        host_id = @users[0].id
+        invitee_array = ([{ "user_id"=>@invitee1.id }, { "user_id"=>@invitee2.id }])
 
-        @good_deed1.add_participants(invitee_array, host_id)
+        @good_deed1.add_participants(invitee_array, @host_id)
 
-        expect(UserGoodDeed.last.user_id).to eq(@users[0].id)
+        expect(UserGoodDeed.last.user_id).to eq(@host_id)
         expect(UserGoodDeed.all.count).to eq(3)
       end
+
+      it "can create a join table record of ONLY host participants of a good deed" do
+        invitee_array = ([])
+
+        @good_deed1.add_participants(invitee_array, @host_id)
+
+        expect(UserGoodDeed.last.user_id).to eq(@host_id)
+        expect(UserGoodDeed.all.count).to eq(1)
+      end
+
     end
   end
 end
