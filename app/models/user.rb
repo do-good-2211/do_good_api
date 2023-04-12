@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/models/user.rb
 class User < ApplicationRecord
   has_many :user_good_deeds
   has_many :good_deeds, through: :user_good_deeds

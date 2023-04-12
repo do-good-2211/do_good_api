@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# db/migrate/20230412144831_create_good_deeds.rb
 class CreateGoodDeeds < ActiveRecord::Migration[7.0]
   def change
     create_table :good_deeds do |t|
