@@ -1,9 +1,12 @@
-class ErrorSerializer 
+# frozen_string_literal: true
+
+# app/serializers/error_serializer.rb
+class ErrorSerializer
   def initialize(errors)
     @errors = errors
   end
 
-  def invalid_request 
+  def invalid_request
     {
       errors: [
         {

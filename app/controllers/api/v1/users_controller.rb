@@ -6,8 +6,7 @@ class Api::V1::UsersController < ApplicationController
     render json: UsersSerializer.new(User.all)
   end
 
-  def show 
-    # options = {include: [:good_deeds], serializer: GoodDeedsSerializer.new(User.find(params[:id]).good_deeds)}
+  def show
     render json: UsersSerializer.new(User.find(params[:id]))
   end
 end
