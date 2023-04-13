@@ -1,10 +1,11 @@
+<!-- ReadMe -->
 <a id="readme-top"></a>
 
 <!-- Opening -->
 <br />
 <div align="center">
   <a href="https://github.com/do-good-2211/do_good_api">
-    <img src=".github/do_good.jpg" alt="Logo" width="100" height="100">
+    <img src=".github/do_good.jpg" alt="Logo" width="150" height="150">
   </a>
 
 <h3 align="center">Welcome to Do Good</h3>
@@ -14,8 +15,6 @@
     With the constant bombardment of negative news, it's easy to think there is no good left in the world. Do Good aims to increase the good by connecting people with opportunities to complete random acts of kindness in an approachable and fun way.
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -41,14 +40,12 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-   ☀️ [Production Website]()
+   ☀️ [Production Website](https://cryptic-fortress-66693.herokuapp.com/)
    <br>
-   ☀️ [Backend Service]()
+   ☀️ [Backend Service](https://warm-temple-59633.herokuapp.com/)
    <br>
    ☀️ [Front End Repository](https://github.com/do-good-2211/do_good_web)
 
@@ -62,19 +59,16 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- Built With -->
 ### Built With
 
-* ![Ruby](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white) **2.7.4**
+* ![Ruby](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white) **3.1.1**
 * ![Ruby on Rails](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white) **7.0.4**
 * <img src=".github/rspec_badge.png" alt="Rspec Badge" height="30">
 * ![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 * ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -85,9 +79,9 @@ If you'd like to demo this API on your local machine:
 3. Navigate to the root folder `cd do_good_api`
 4. Run `bundle install`
 5. Run `rails db:{create,migrate}`
-6. Inspect the `/db/schema.rb` and compare to the 'Schema' section below to ensure migration has been done successfully.
+6. Inspect the `/db/schema.rb` and compare to the 'Schema' section below to ensure migration has been done successfully
 7. Run `rails s`
-8. Visit http://localhost3000/
+8. Visit http://localhost:3000/
 
 <!-- Prerequisites -->
 ### Prerequisites
