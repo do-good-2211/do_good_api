@@ -9,7 +9,6 @@ class GoodDeed < ApplicationRecord
 
   enum status: ["In Progress", "Completed"]
 
-
   def add_participants(all_invitees, host_id)
     all_participant_ids = all_invitees.map do |invitee|
       invitee["user_id"]
