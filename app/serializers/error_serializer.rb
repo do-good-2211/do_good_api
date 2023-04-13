@@ -18,3 +18,4 @@ class ErrorSerializer
     }
   end
 end
+

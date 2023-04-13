@@ -1,4 +1,3 @@
-require "rails_helper"
 
 RSpec.describe "User Request Spec" do
   describe "users request" do

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :random_acts, only: [:index]
 
       resources :users do
-        resources :good_deeds, only: [:create]
+        resources :good_deeds, only: [:create], controller: 'users/good_deeds'
       end
     end
   end

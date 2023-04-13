@@ -7,3 +7,4 @@ class Api::V1::RandomActsController < ApplicationController
     render json: RandomActsSerializer.new(random_acts)
   end
 end
+
