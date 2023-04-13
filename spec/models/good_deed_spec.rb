@@ -26,24 +26,41 @@ RSpec.describe GoodDeed, type: :model do
         @invitee2 = users[2]
       end
 
-      it "can create a join table record of all participants of a good deed" do
-        invitee_array = ([{ "user_id"=>@invitee1.id }, { "user_id"=>@invitee2.id }])
+      describe "Happy Path Tests" do
+        it "can create a join table record of all participants of a good deed" do
+          invitee_array = ([{ "user_id"=>@invitee1.id }, { "user_id"=>@invitee2.id }])
 
-        @good_deed1.add_participants(invitee_array, @host_id)
+          @good_deed1.add_participants(invitee_array, @host_id)
 
-        expect(UserGoodDeed.last.user_id).to eq(@host_id)
-        expect(UserGoodDeed.all.count).to eq(3)
+          expect(UserGoodDeed.last.user_id).to eq(@host_id)
+          expect(UserGoodDeed.all.count).to eq(3)
+        end
+
+        it "can create a join table record of ONLY host participants of a good deed" do
+          invitee_array = ([])
+
+          @good_deed1.add_participants(invitee_array, @host_id)
+
+          expect(UserGoodDeed.last.user_id).to eq(@host_id)
+          expect(UserGoodDeed.all.count).to eq(1)
+        end
       end
 
-      it "can create a join table record of ONLY host participants of a good deed" do
-        invitee_array = ([])
+      describe "Sad Path Tests" do
+        it "cannot create a join table record when host_id is invalid" do
+          invitee_array = ([])
+          invalid_id = 0
 
-        @good_deed1.add_participants(invitee_array, @host_id)
+          expect{@good_deed1.add_participants(invitee_array, invalid_id)}.to raise_error(ActiveRecord::RecordNotFound)
+        end
 
-        expect(UserGoodDeed.last.user_id).to eq(@host_id)
-        expect(UserGoodDeed.all.count).to eq(1)
+        it "cannot create a join table record when host_id is nil" do
+          invitee_array = ([])
+          invalid_id = nil
+
+          expect{@good_deed1.add_participants(invitee_array, invalid_id)}.to raise_error(ActiveRecord::RecordNotFound)
+        end
       end
-
     end
   end
 end

@@ -11,15 +11,16 @@ class GoodDeed < ApplicationRecord
 
 
   def add_participants(all_invitees, host_id)
-    
     all_participant_ids = all_invitees.map do |invitee|
       invitee["user_id"]
     end
-    
     all_participant_ids << host_id
 
-    all_participant_ids.each do |id|
-      UserGoodDeed.create!(good_deed_id: self.id, user_id: id)
+    ActiveRecord::Base.transaction do
+      all_participant_ids.each do |id|
+        user = User.find(id)
+        UserGoodDeed.create(good_deed_id: self.id, user_id: user.id)
+      end
     end
   end
 end
