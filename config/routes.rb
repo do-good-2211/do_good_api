@@ -11,8 +11,10 @@ Rails.application.routes.draw do
       resources :good_deeds, only: [:index]
 
       resources :users do
-        resources :good_deeds, only: [:create], controller: 'users/good_deeds'
+        resources :good_deeds, only: [:create, :destroy], controller: 'users/good_deeds'
       end
     end
   end
+
+  # delete "/api/v1/users/:user_id/good_deeds/:id", to: "users/good_deeds#destroy"
 end

@@ -114,4 +114,28 @@ RSpec.describe "Good Deeds Controller" do
       end
     end
   end
+
+  describe "#destroy" do
+    it 'deletes the good deed' do
+      create_list(:user, 2)
+      user1 = User.first
+      user2 = User.last
+
+      deed1 = create(:good_deed, host_id: user2.id)
+      deed2 = create(:good_deed, host_id: user2.id)
+
+      user2_deed = create(:user_good_deed, user_id: user2.id, good_deed_id: deed1.id )
+      user1_deed = create(:user_good_deed, user_id: user1.id, good_deed_id: deed1.id )
+      user3_deed = create(:user_good_deed, user_id: user2.id, good_deed_id: deed2.id )
+
+      expect(user2.good_deeds.count).to eq(2)
+      expect(user1.good_deeds.count).to eq(1)
+
+      delete "/api/v1/users/#{user2.id}/good_deeds/#{deed1.id}"
+
+      expect(response).to be_successful
+      expect(user2.good_deeds.count).to eq(1)
+      expect(user1.good_deeds.count).to eq(0)
+    end
+  end
 end
