@@ -7,6 +7,6 @@ class ApplicationController < ActionController::API
   rescue_from URI::InvalidURIError, with: :render_invalid_response
 
   def render_invalid_response(exception)
-    render json: ErrorSerializer.new(exception.message).invalid_request, status: 404
+    render json: ErrorSerializer.new(exception.message).invalid_request, status: :not_found
   end
 end
