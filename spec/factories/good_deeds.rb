@@ -4,6 +4,7 @@ FactoryBot.define do
     date { Faker::Date.between(from: '2023-05-23', to: '2024-09-25') }
     time { "16:00" }
     # notes { Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 3) }
-    # media_link { Faker::Internet.url }
+    media_link { Faker::Internet.url }
+    host_id { Faker::Number.number(digits: 1) }
   end
 end
