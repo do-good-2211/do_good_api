@@ -14,7 +14,7 @@ class User < ApplicationRecord
   enum role: %i[user admin]
 
   def self.from_omniauth(response)
-    self.find_or_create_by(uid: response[:uid], provider: response[:provider]) do |u|
+    find_or_create_by(uid: response[:uid], provider: response[:provider]) do |u|
       u.name = response[:info][:name]  
       u.email = response[:info][:email]  
       u.password = SecureRandom.hex(15)  
