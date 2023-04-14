@@ -11,7 +11,7 @@ RSpec.describe "User good deed request" do
 
       get "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}"
       deed = JSON.parse(response.body, symbolize_names: true)
-  
+
       expect(response).to be_successful
       expect(deed).to be_a(Hash)
       expect(deed[:data][:id]).to eq(good_deed1.id.to_s)
