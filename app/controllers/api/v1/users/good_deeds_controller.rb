@@ -26,4 +26,9 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
       render json: ErrorSerializer.new("Completed good deed cannot be deleted").invalid_request, status: 404
     end
   end
+
+  def show
+    deed = GoodDeed.find(params[:id])
+    render json: GoodDeedSerializer.new(deed)
+  end
 end
