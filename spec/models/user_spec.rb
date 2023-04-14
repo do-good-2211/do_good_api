@@ -17,4 +17,8 @@ RSpec.describe User, type: :model do
     it { should have_many :user_good_deeds }
     it { should have_many(:good_deeds).through(:user_good_deeds) }
   end
+
+  describe "oauth" do 
+    
+  end
 end

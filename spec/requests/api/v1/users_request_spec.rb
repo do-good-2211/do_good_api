@@ -43,26 +43,26 @@ RSpec.describe "User Request Spec" do
 
   describe "Get one user" do
     it "can get one user from an id" do
-      user = create(:user)
+      user = create(:user, uid: 1111)
       user_data_keys = [:id, :type, :attributes]
 
-      get "/api/v1/users/#{user.id}"
+      get "/api/v1/users/#{user.uid}"
 
       expect(response).to be_successful
 
       user_parsed = JSON.parse(response.body, symbolize_names: true)
-
+    
       expect(user_parsed).to be_a(Hash)
       expect(user_parsed).to have_key(:data)
       expect(user_parsed[:data].keys).to eq(user_data_keys)
-      expect(user_parsed[:data][:attributes].keys).to eq([:name, :email, :password, :good_deeds])
+      expect(user_parsed[:data][:attributes].keys).to eq([:name, :role, :good_deeds])
       expect(user_parsed[:data][:attributes][:good_deeds]).to be_an(Array)
       expect(user_parsed[:data][:attributes][:good_deeds].count).to eq(0)
     end
 
     it "can be have an array of good deeds" do
-      user = create(:user)
-      host = create(:user)
+      user = create(:user, uid: 1111)
+      host = create(:user, uid: 1234)
       good_deed1 = create(:good_deed, host_id: host.id)
       good_deed2 = create(:good_deed, host_id: host.id)
       user_good_deed1 = create(:user_good_deed, user_id: user.id, good_deed_id: good_deed1.id)
@@ -70,7 +70,7 @@ RSpec.describe "User Request Spec" do
 
       expect(user.good_deeds).to eq([good_deed1, good_deed2])
 
-      get "/api/v1/users/#{user.id}"
+      get "/api/v1/users/#{user.uid}"
 
       expect(response).to be_successful
 
@@ -97,7 +97,7 @@ RSpec.describe "User Request Spec" do
                                         "title": "Invalid Request",
                                         "detail": 
                                           [
-                                            "Couldn't find User with 'id'=900000000"
+                                            "Couldn't find User with [WHERE \"users\".\"uid\" = $1]"
                                           ]
                                       }
                                     ]
