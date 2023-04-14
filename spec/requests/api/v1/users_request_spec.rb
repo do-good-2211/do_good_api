@@ -64,8 +64,8 @@ RSpec.describe "User Request Spec" do
       host = create(:user)
       good_deed1 = create(:good_deed, host_id: host.id)
       good_deed2 = create(:good_deed, host_id: host.id)
-      user_good_deed1 = create(:user_good_deed, user_id: user.id, good_deed_id: good_deed1.id)
-      user_good_deed2 = create(:user_good_deed, user_id: user.id, good_deed_id: good_deed2.id)
+      create(:user_good_deed, user_id: user.id, good_deed_id: good_deed1.id)
+      create(:user_good_deed, user_id: user.id, good_deed_id: good_deed2.id)
 
       expect(user.good_deeds).to eq([good_deed1, good_deed2])
 
