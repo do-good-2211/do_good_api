@@ -23,7 +23,7 @@ class GoodDeed < ApplicationRecord
     end
   end
 
-  def self.completed_deeds
-    GoodDeed.where("status = 1")
+  def self.completed_photo_deeds
+    GoodDeed.where("status = 1").where("media_link IS NOT NULL")
   end
 end
