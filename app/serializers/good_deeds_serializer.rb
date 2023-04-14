@@ -5,4 +5,3 @@ class GoodDeedsSerializer
   include JSONAPI::Serializer
   attributes :name, :media_link
 end
-
