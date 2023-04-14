@@ -13,7 +13,6 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
   end
 
   def destroy
-    # binding.pry
       user_deed = UserGoodDeed.find_by(good_deed_id: params[:id])
       user_deed.destroy
       @deed.destroy
