@@ -7,6 +7,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: UsersSerializer.new(User.find(params[:id]))
+    render json: UsersSerializer.new(User.find_by!(uid: params[:id]))
+  end
+
+  def create
+    user = User.from_omniauth(params[:query])
+    render json: UsersSerializer.new(user)
   end
 end
