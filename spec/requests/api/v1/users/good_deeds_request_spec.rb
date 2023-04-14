@@ -124,9 +124,9 @@ RSpec.describe "Good Deeds Controller" do
       deed1 = create(:good_deed, host_id: user2.id)
       deed2 = create(:good_deed, host_id: user2.id)
 
-      user2_deed = create(:user_good_deed, user_id: user2.id, good_deed_id: deed1.id )
-      user1_deed = create(:user_good_deed, user_id: user1.id, good_deed_id: deed1.id )
-      user3_deed = create(:user_good_deed, user_id: user2.id, good_deed_id: deed2.id )
+      user2_deed = create(:user_good_deed, user_id: user2.id, good_deed_id: deed1.id)
+      user1_deed = create(:user_good_deed, user_id: user1.id, good_deed_id: deed1.id)
+      user3_deed = create(:user_good_deed, user_id: user2.id, good_deed_id: deed2.id)
 
       expect(user2.good_deeds.count).to eq(2)
       expect(user1.good_deeds.count).to eq(1)
