@@ -16,4 +16,9 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
     user_deed.destroy
     deed.destroy
   end
+
+  def show
+    deed = GoodDeed.find(params[:id])
+    render json: GoodDeedSerializer.new(deed)
+  end
 end
