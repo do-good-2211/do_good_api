@@ -107,7 +107,7 @@ RSpec.describe "User Request Spec" do
       end
     end
 
-    describe 'Create a user' do
+    describe 'Create/Find a user' do
       it 'creates a new user' do
         user_params = {
           query: {
@@ -136,6 +136,39 @@ RSpec.describe "User Request Spec" do
         expect(created_user.uid).to eq('100000000000000000000')
         expect(created_user.email).to eq('john@example.com')
         expect(created_user.provider).to eq('google_oauth2')
+      end
+
+      it 'finds an existing user' do
+        user_params = {
+          query: {
+            provider: "google_oauth2",
+            uid: "100000000000000000000",
+            info: {
+              name: "John Smith",
+              email: "john@example.com",
+              first_name: "John",
+              last_name: "Smith",
+              image: "https://lh4.googleusercontent.com/photo.jpg",
+              urls: {
+                google: "https://plus.google.com/+JohnSmith"
+              }
+            }
+          }
+        }
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+      
+        post '/api/v1/users', headers: headers, params: JSON.generate(user_params)
+        created_user = User.last
+
+        post '/api/v1/users', headers: headers, params: JSON.generate(user_params)
+        found_user = User.find_by(uid: '100000000000000000000')
+
+        expect(response).to be_successful
+        expect(found_user.name).to eq('John Smith')
+        expect(found_user.uid).to eq('100000000000000000000')
+        expect(found_user.email).to eq('john@example.com')
+        expect(found_user.provider).to eq('google_oauth2')
       end
     end
   end
