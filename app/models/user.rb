@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :user_good_deeds
   has_many :good_deeds, through: :user_good_deeds
 
-  validates_presence_of :name, :role, :email, :password
-  validates_uniqueness_of :email
+  validates_presence_of :name, :role, :email, :password, :uid
+  validates_uniqueness_of :email, :uid
   validates :password, confirmation: true
 
   has_secure_password
