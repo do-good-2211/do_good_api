@@ -61,6 +61,20 @@ RSpec.describe GoodDeed, type: :model do
           expect { @good_deed1.add_participants(invitee_array, invalid_id) }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
+
+      describe "Class Methods" do
+        before(:each) do
+          @good_deed1 = create(:good_deed)
+          @good_deed2 = create(:good_deed, status: 1)
+          @good_deed3 = create(:good_deed)
+        end
+
+        it "only returns good deeds with a status of 'Completed'" do
+          expect(GoodDeed.completed_deeds).to eq([@good_deed2])
+          @good_deed4 = create(:good_deed, status: 1)
+          expect(GoodDeed.completed_deeds).to eq([@good_deed2, @good_deed4])
+        end
+      end
     end
   end
 end
