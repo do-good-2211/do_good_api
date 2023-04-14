@@ -108,8 +108,8 @@ RSpec.describe "User Request Spec" do
     end
 
     describe 'Create/Find a user' do
-      it 'creates a new user' do
-        user_params = {
+      before(:each) do
+        @user_params = {
           query: {
             provider: "google_oauth2",
             uid: "100000000000000000000",
@@ -125,10 +125,12 @@ RSpec.describe "User Request Spec" do
             }
           }
         }
+      end
 
+      it 'creates a new user' do
         headers = { 'CONTENT_TYPE' => 'application/json' }
+        post '/api/v1/users', headers:, params: JSON.generate(@user_params)
 
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
         created_user = User.last
 
         expect(response).to be_successful
@@ -139,28 +141,14 @@ RSpec.describe "User Request Spec" do
       end
 
       it 'finds an existing user' do
-        user_params = {
-          query: {
-            provider: "google_oauth2",
-            uid: "100000000000000000000",
-            info: {
-              name: "John Smith",
-              email: "john@example.com",
-              first_name: "John",
-              last_name: "Smith",
-              image: "https://lh4.googleusercontent.com/photo.jpg",
-              urls: {
-                google: "https://plus.google.com/+JohnSmith"
-              }
-            }
-          }
-        }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
 
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+        # # POST request to create the user
+        post '/api/v1/users', headers:, params: JSON.generate(@user_params)
 
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+        ## POST request to find the user
+        post '/api/v1/users', headers:, params: JSON.generate(@user_params)
         found_user = User.find_by(uid: '100000000000000000000')
 
         expect(response).to be_successful
