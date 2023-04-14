@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # app/models/good_deed.rb
 class GoodDeed < ApplicationRecord
   has_many :user_good_deeds, dependent: :destroy
