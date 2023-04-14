@@ -67,12 +67,13 @@ RSpec.describe GoodDeed, type: :model do
           @good_deed1 = create(:good_deed)
           @good_deed2 = create(:good_deed, status: 1)
           @good_deed3 = create(:good_deed)
+          @good_deed4 = create(:good_deed, status: 1, media_link: nil)
         end
 
-        it "only returns good deeds with a status of 'Completed'" do
-          expect(GoodDeed.completed_deeds).to eq([@good_deed2])
-          @good_deed4 = create(:good_deed, status: 1)
-          expect(GoodDeed.completed_deeds).to eq([@good_deed2, @good_deed4])
+        it "only returns good deeds with a status of 'Completed' and with a populated media link" do
+          expect(GoodDeed.completed_photo_deeds).to eq([@good_deed2])
+          @good_deed5 = create(:good_deed, status: 1)
+          expect(GoodDeed.completed_photo_deeds).to eq([@good_deed2, @good_deed5])
         end
       end
     end
