@@ -8,4 +8,9 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
     new_good_deed.add_participants(params[:attendees], params[:user_id].to_i)
     render json: GoodDeedsSerializer.new(new_good_deed), status: 201
   end
+
+  def destroy
+    good_deed = UserGoodDeed.find_by(user_id: params[:user_id], good_deed_id: params[:id])
+    good_deed.destroy
+  end
 end
