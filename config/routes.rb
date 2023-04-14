@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :random_acts, only: [:index]
 
+      resources :good_deeds, only: [:index]
+
       resources :users do
         resources :good_deeds, only: [:create], controller: 'users/good_deeds'
       end
