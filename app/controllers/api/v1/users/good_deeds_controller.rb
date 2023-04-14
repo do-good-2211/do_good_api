@@ -10,7 +10,9 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
   end
 
   def destroy
-    good_deed = UserGoodDeed.find_by(user_id: params[:user_id], good_deed_id: params[:id])
-    good_deed.destroy
+    user_deed = UserGoodDeed.find_by(good_deed_id: params[:id])
+    deed = GoodDeed.find(params[:id])
+    user_deed.destroy
+    deed.destroy
   end
 end
