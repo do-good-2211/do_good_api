@@ -12,4 +12,14 @@ class User < ApplicationRecord
   has_secure_password
 
   enum role: %i[user admin]
+
+  def self.from_omniauth(response)
+    self.find_or_create_by(uid: response[:uid], provider: response[:provider]) do |u|
+      u.name = response[:info][:name]  
+      u.email = response[:info][:email]  
+      u.password = SecureRandom.hex(15)  
+    end  
+  end
 end
+
+
