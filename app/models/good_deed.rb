@@ -2,7 +2,7 @@
 
 # app/models/good_deed.rb
 class GoodDeed < ApplicationRecord
-  has_many :user_good_deeds
+  has_many :user_good_deeds, dependent: :destroy
   has_many :users, through: :user_good_deeds
 
   validates :name, :host_id, :date, :time, :status, presence: true
@@ -21,5 +21,9 @@ class GoodDeed < ApplicationRecord
         UserGoodDeed.create(good_deed_id: self.id, user_id: user.id)
       end
     end
+  end
+
+  def self.completed_deeds
+    GoodDeed.where("status = 1")
   end
 end
