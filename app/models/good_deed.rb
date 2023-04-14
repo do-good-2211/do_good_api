@@ -26,5 +26,4 @@ class GoodDeed < ApplicationRecord
   def self.completed_deeds
     GoodDeed.where("status = 1")
   end
-
 end
