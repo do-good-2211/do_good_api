@@ -5,9 +5,9 @@ class GoodDeed < ApplicationRecord
   has_many :user_good_deeds
   has_many :users, through: :user_good_deeds
 
-  validates_presence_of :name, :host_id, :date, :time, :status
+  validates :name, :host_id, :date, :time, :status, presence: true
 
-  enum status: ["In Progress", "Completed"]
+  enum status: { "In Progress" => 0, "Completed" => 1 }
 
   def add_participants(all_invitees, host_id)
     all_participant_ids = all_invitees.map do |invitee|

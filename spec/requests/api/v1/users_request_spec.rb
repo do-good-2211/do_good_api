@@ -53,7 +53,7 @@ RSpec.describe "User Request Spec" do
         expect(response).to be_successful
 
         user_parsed = JSON.parse(response.body, symbolize_names: true)
-      
+
         expect(user_parsed).to be_a(Hash)
         expect(user_parsed).to have_key(:data)
         expect(user_parsed[:data].keys).to eq(user_data_keys)
@@ -67,8 +67,8 @@ RSpec.describe "User Request Spec" do
         host = create(:user, uid: 1234)
         good_deed1 = create(:good_deed, host_id: host.id)
         good_deed2 = create(:good_deed, host_id: host.id)
-        user_good_deed1 = create(:user_good_deed, user_id: user.id, good_deed_id: good_deed1.id)
-        user_good_deed2 = create(:user_good_deed, user_id: user.id, good_deed_id: good_deed2.id)
+        create(:user_good_deed, user_id: user.id, good_deed_id: good_deed1.id)
+        create(:user_good_deed, user_id: user.id, good_deed_id: good_deed2.id)
 
         expect(user.good_deeds).to eq([good_deed1, good_deed2])
 
@@ -84,7 +84,7 @@ RSpec.describe "User Request Spec" do
         expect(user_parsed[:data][:attributes][:good_deeds].second[:name]).to eq(good_deed2.name)
       end
 
-      it "renders an error if a user id that doesn't exist is provided in the query" do 
+      it "renders an error if a user id that doesn't exist is provided in the query" do
         get "/api/v1/users/900000000"
 
         expect(response.status).to eq(404)
@@ -92,18 +92,18 @@ RSpec.describe "User Request Spec" do
         error_response = JSON.parse(response.body, symbolize_names: true)
 
         expect(error_response).to eq({
-                                      "errors":  
-                                      [
-                                        {
-                                          "status": "404",
-                                          "title": "Invalid Request",
-                                          "detail": 
-                                            [
-                                              "Couldn't find User with [WHERE \"users\".\"uid\" = $1]"
-                                            ]
-                                        }
-                                      ]
-                                    })
+                                       "errors":
+                                       [
+                                         {
+                                           "status": "404",
+                                           "title": "Invalid Request",
+                                           "detail":
+                                             [
+                                               "Couldn't find User with [WHERE \"users\".\"uid\" = $1]"
+                                             ]
+                                         }
+                                       ]
+                                     })
       end
     end
 
@@ -127,8 +127,8 @@ RSpec.describe "User Request Spec" do
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-      
-        post '/api/v1/users', headers: headers, params: JSON.generate(user_params)
+
+        post '/api/v1/users', headers:, params: JSON.generate(user_params)
         created_user = User.last
 
         expect(response).to be_successful
@@ -157,11 +157,10 @@ RSpec.describe "User Request Spec" do
         }
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
-      
-        post '/api/v1/users', headers: headers, params: JSON.generate(user_params)
-        created_user = User.last
 
-        post '/api/v1/users', headers: headers, params: JSON.generate(user_params)
+        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+
+        post '/api/v1/users', headers:, params: JSON.generate(user_params)
         found_user = User.find_by(uid: '100000000000000000000')
 
         expect(response).to be_successful

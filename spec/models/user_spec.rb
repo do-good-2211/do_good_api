@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:good_deeds).through(:user_good_deeds) }
   end
 
-  describe "class methods" do 
+  describe "class methods" do
     describe '.from_omniauth' do
       it 'finds or creates a user' do
         user_hash = {
