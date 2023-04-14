@@ -1,4 +1,3 @@
-
 RSpec.describe "User Request Spec" do
   describe "users request" do
     it "can get a list of users" do
@@ -82,7 +81,7 @@ RSpec.describe "User Request Spec" do
       expect(user_parsed[:data][:attributes][:good_deeds].second[:name]).to eq(good_deed2.name)
     end
 
-    it "renders an error if a user id that doesn't exist is provided in the query" do 
+    it "renders an error if a user id that doesn't exist is provided in the query" do
       get "/api/v1/users/900000000"
 
       expect(response.status).to eq(404)
@@ -90,18 +89,18 @@ RSpec.describe "User Request Spec" do
       error_response = JSON.parse(response.body, symbolize_names: true)
 
       expect(error_response).to eq({
-                                    "errors":  
-                                    [
-                                      {
-                                        "status": "404",
-                                        "title": "Invalid Request",
-                                        "detail": 
-                                          [
-                                            "Couldn't find User with 'id'=900000000"
-                                          ]
-                                      }
-                                    ]
-                                  })
+                                     "errors":
+                                     [
+                                       {
+                                         "status": "404",
+                                         "title": "Invalid Request",
+                                         "detail":
+                                           [
+                                             "Couldn't find User with 'id'=900000000"
+                                           ]
+                                       }
+                                     ]
+                                   })
     end
   end
 end
