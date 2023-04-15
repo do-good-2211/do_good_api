@@ -45,10 +45,10 @@ RSpec.describe "User Request Spec" do
 
     describe "Get one user" do
       it "can get one user from an id" do
-        user = create(:user, uid: 1111)
+        user = create(:user, id: 1111)
         user_data_keys = [:id, :type, :attributes]
 
-        get "/api/v1/users/#{user.uid}"
+        get "/api/v1/users/#{user.id}"
 
         expect(response).to be_successful
 
@@ -72,7 +72,7 @@ RSpec.describe "User Request Spec" do
 
         expect(user.good_deeds).to eq([good_deed1, good_deed2])
 
-        get "/api/v1/users/#{user.uid}"
+        get "/api/v1/users/#{user.id}"
 
         expect(response).to be_successful
 
@@ -99,7 +99,7 @@ RSpec.describe "User Request Spec" do
                                            "title": "Invalid Request",
                                            "detail":
                                              [
-                                               "Couldn't find User with [WHERE \"users\".\"uid\" = $1]"
+                                               "Couldn't find User with 'id'=900000000"
                                              ]
                                          }
                                        ]
