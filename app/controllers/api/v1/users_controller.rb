@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: UsersSerializer.new(User.find_by!(uid: params[:id]))
+    render json: UsersSerializer.new(User.find(params[:id]))
   end
 
   def create
