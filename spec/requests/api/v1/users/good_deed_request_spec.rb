@@ -5,7 +5,7 @@ RSpec.describe "User good deed request" do
     it "retuns a single user good deed" do
       user = create(:user)
       good_deed1 = create(:good_deed)
-      user_deed = UserGoodDeed.create(user_id: user.id, good_deed_id: good_deed1.id)
+      UserGoodDeed.create(user_id: user.id, good_deed_id: good_deed1.id)
       keys = [:id, :type, :attributes]
       attribute_keys = [:name, :date, :time, :status, :notes, :media_link]
 

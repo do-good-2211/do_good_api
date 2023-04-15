@@ -124,9 +124,9 @@ RSpec.describe "Good Deeds Controller" do
       deed1 = create(:good_deed, host_id: user2.id)
       deed2 = create(:good_deed, host_id: user2.id)
 
-      user2_deed = create(:user_good_deed, user_id: user2.id, good_deed_id: deed1.id)
-      user1_deed = create(:user_good_deed, user_id: user1.id, good_deed_id: deed1.id)
-      user3_deed = create(:user_good_deed, user_id: user2.id, good_deed_id: deed2.id)
+      create(:user_good_deed, user_id: user2.id, good_deed_id: deed1.id)
+      create(:user_good_deed, user_id: user1.id, good_deed_id: deed1.id)
+      create(:user_good_deed, user_id: user2.id, good_deed_id: deed2.id)
 
       expect(user2.good_deeds.count).to eq(2)
       expect(user1.good_deeds.count).to eq(1)
@@ -141,8 +141,8 @@ RSpec.describe "Good Deeds Controller" do
     it "couldn't delete if user or good deed does not exist" do
       user = create(:user)
       deed1 = create(:good_deed, host_id: user.id, status: 1)
-      user_deed = create(:user_good_deed, user_id: user.id, good_deed_id: deed1.id )
- 
+      create(:user_good_deed, user_id: user.id, good_deed_id: deed1.id)
+
       expect(user.good_deeds.count).to eq(1)
 
       delete "/api/v1/users/#{user.id}/good_deeds/#{deed1.id}"
@@ -155,6 +155,91 @@ RSpec.describe "Good Deeds Controller" do
       expect(parse[:errors]).to be_an(Array)
       expect(parse[:errors][0].keys).to eq([:status, :title, :detail])
       expect(parse[:errors][0][:detail]).to eq(["Completed good deed cannot be deleted"])
+    end
+  end
+
+  describe "#edit" do
+    it "update an existing good deed" do
+      user = create(:user)
+      good_deed1 = create(:good_deed)
+      UserGoodDeed.create(user_id: user.id, good_deed_id: good_deed1.id)
+
+      previous_status = good_deed1.status
+      previous_name = good_deed1.name
+
+      good_deed_params = {
+        name: "Mow Lawn",
+        date: "02-02-2024",
+        time: "16:00",
+        notes: "Stuff and things",
+        status: "Completed",
+        media_links: "picture.jpg",
+        host_id: user.id,
+        attendees: []
+      }
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      patch "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}", headers:, params: JSON.generate(good_deed_params)
+
+      # patch "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}", headers: headers, params: good_deed_params, as: :json
+      parse = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(parse).to be_a(Hash)
+      expect(parse[:status]).to_not eq(previous_status)
+      expect(parse[:status]).to eq("Completed")
+      expect(parse[:name]).to_not eq(previous_name)
+      expect(parse[:name]).to eq("Mow Lawn")
+    end
+
+    it "can't update when user id invalid" do
+      user = create(:user)
+      good_deed1 = create(:good_deed)
+      UserGoodDeed.create(user_id: user.id, good_deed_id: good_deed1.id)
+
+      good_deed_params = {
+        name: "Mow Lawn",
+        date: "02-02-2024",
+        time: "16:00",
+        notes: "Stuff and things",
+        status: "Completed",
+        media_links: "picture.jpg",
+        host_id: user.id,
+        attendees: []
+      }
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      patch "/api/v1/users/abc/good_deeds/#{good_deed1.id}", headers:, params: JSON.generate(good_deed_params)
+      parse = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(404)
+      expect(parse[:errors][0][:detail].first).to eq("Couldn't find User with 'id'=abc")
+    end
+
+    it "can't update when good deed id invalid" do
+      user = create(:user)
+      good_deed1 = create(:good_deed)
+      UserGoodDeed.create(user_id: user.id, good_deed_id: good_deed1.id)
+
+      good_deed_params = {
+        name: "Mow Lawn",
+        date: "02-02-2024",
+        time: "16:00",
+        notes: "Stuff and things",
+        status: "Completed",
+        media_links: "picture.jpg",
+        host_id: user.id,
+        attendees: []
+      }
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      patch "/api/v1/users/#{user.id}/good_deeds/zxvsd46546", headers:, params: JSON.generate(good_deed_params)
+      parse = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(404)
+      expect(parse[:errors][0][:detail].first).to eq("Couldn't find GoodDeed with 'id'=zxvsd46546 [WHERE \"user_good_deeds\".\"user_id\" = $1]")
     end
   end
 end

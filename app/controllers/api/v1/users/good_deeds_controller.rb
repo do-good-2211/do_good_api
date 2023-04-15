@@ -13,21 +13,33 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
   end
 
   def destroy
-      user_deed = UserGoodDeed.find_by(good_deed_id: params[:id])
-      user_deed.destroy
-      @deed.destroy
+    user_deed = UserGoodDeed.find_by(good_deed_id: params[:id])
+    user_deed.destroy
+    @deed.destroy
   end
-
 
   def check_deed_status
     @deed = GoodDeed.find(params[:id])
-    if @deed.status == "Completed"
-      render json: ErrorSerializer.new("Completed good deed cannot be deleted").invalid_request, status: 404
-    end
+    return unless @deed.status == "Completed"
+
+    render json: ErrorSerializer.new("Completed good deed cannot be deleted").invalid_request, status: 404
   end
 
   def show
     deed = GoodDeed.find(params[:id])
     render json: GoodDeedSerializer.new(deed)
+  end
+
+  def update
+    user = User.find(params[:user_id])
+    good_deed = user.good_deeds.find(params[:id])
+    good_deed.update(good_deed_params)
+    render json: good_deed
+  end
+
+  private
+
+  def good_deed_params
+    params.permit(:name, :date, :time, :notes, :status, :media_link, :attendees, :host_id)
   end
 end
