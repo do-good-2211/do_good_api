@@ -28,7 +28,7 @@ RSpec.describe GoodDeed, type: :model do
 
       describe "Happy Path Tests" do
         it "can create a join table record of all participants of a good deed" do
-          invitee_array = [{ "user_id" => @invitee1.id }, { "user_id" => @invitee2.id }]
+          invitee_array = [@invitee1.id, @invitee2.id]
 
           @good_deed1.add_participants(invitee_array, @host_id)
 
