@@ -12,7 +12,7 @@ RSpec.describe "Good Deeds Controller" do
 
     let(:good_deed_params) do
       {
-        deed_name:,
+        name:,
         date:,
         time:,
         attendees: invitees
@@ -20,12 +20,12 @@ RSpec.describe "Good Deeds Controller" do
     end
 
     describe "when sucessful" do
-      let(:deed_name) { "Wash neighbor's car." }
+      let(:name) { "Wash neighbor's car." }
       let(:date) { "01-01-2023" }
       let(:time) { "17:00" }
 
       describe "when 1+ invitees" do
-        let(:invitees) { [{ "user_id": invitee1.id }, { "user_id": invitee2.id }] }
+        let(:invitees) { [invitee1.id, invitee2.id] }
 
         it "creates a new Good Deed record" do
           headers = { "CONTENT_TYPE" => "application/json" }
@@ -63,10 +63,10 @@ RSpec.describe "Good Deeds Controller" do
 
     describe "when NOT sucessful" do
       describe "when attributes are missing" do
-        let(:deed_name) { "" }
+        let(:name) { "" }
         let(:date) { "" }
         let(:time) { "" }
-        let(:invitees) { [{ "user_id": invitee1.id }, { "user_id": invitee2.id }] }
+        let(:invitees) { [invitee1.id, invitee2.id] }
 
         it "returns 404" do
           headers = { "CONTENT_TYPE" => "application/json" }
@@ -80,7 +80,7 @@ RSpec.describe "Good Deeds Controller" do
       end
 
       describe "when attributes are nil/invalid" do
-        let(:deed_name) { nil }
+        let(:name) { nil }
         let(:date) { nil }
         let(:time) { nil }
         let(:invitees) { nil }
@@ -97,10 +97,10 @@ RSpec.describe "Good Deeds Controller" do
       end
 
       describe "EDGE CASE: when invited user_ids are invalid" do
-        let(:deed_name) { "Wash neighbor's car." }
+        let(:name) { "Wash neighbor's car." }
         let(:date) { "01-01-2023" }
         let(:time) { "17:00" }
-        let(:invitees) { [{ "user_id": invitee2.id }, { "user_id": 0 }] }
+        let(:invitees) { [invitee2.id, 0 ] }
 
         it "returns 404" do
           headers = { "CONTENT_TYPE" => "application/json" }
