@@ -10,13 +10,10 @@ class GoodDeed < ApplicationRecord
   enum status: { "In Progress" => 0, "Completed" => 1 }
 
   def add_participants(all_invitees, host_id)
-    all_participant_ids = all_invitees.map do |invitee|
-      invitee["user_id"]
-    end
-    all_participant_ids << host_id
+    all_invitees << host_id
 
     ActiveRecord::Base.transaction do
-      all_participant_ids.each do |id|
+      all_invitees.each do |id|
         user = User.find(id)
         UserGoodDeed.create(good_deed_id: self.id, user_id: user.id)
       end
