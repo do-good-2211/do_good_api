@@ -10,6 +10,7 @@ class GoodDeed < ApplicationRecord
   enum status: { "In Progress" => 0, "Completed" => 1 }
 
   def add_participants(all_invitees, host_id)
+    all_invitees = [] if all_invitees == nil
     all_invitees << host_id
 
     ActiveRecord::Base.transaction do
