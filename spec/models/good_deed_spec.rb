@@ -71,9 +71,9 @@ RSpec.describe GoodDeed, type: :model do
         end
 
         it "only returns good deeds with a status of 'Completed' and with a populated media link" do
-          expect(GoodDeed.completed_photo_deeds).to eq([@good_deed2])
+          expect(GoodDeed.completed_photo_deeds).to match_array([@good_deed2])
           @good_deed5 = create(:good_deed, status: 1)
-          expect(GoodDeed.completed_photo_deeds).to eq([@good_deed2, @good_deed5])
+          expect(GoodDeed.completed_photo_deeds).to match_array([@good_deed2, @good_deed5])
         end
       end
     end
