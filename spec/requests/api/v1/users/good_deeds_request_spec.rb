@@ -181,7 +181,6 @@ RSpec.describe "Good Deeds Controller" do
 
       patch "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}", headers:, params: JSON.generate(good_deed_params)
 
-      # patch "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}", headers: headers, params: good_deed_params, as: :json
       parse = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
