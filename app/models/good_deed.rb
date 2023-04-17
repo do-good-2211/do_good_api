@@ -24,4 +24,8 @@ class GoodDeed < ApplicationRecord
   def self.completed_photo_deeds
     GoodDeed.where("status = 1").where("media_link IS NOT NULL")
   end
+
+  def attendees 
+    users.where.not(id: self.host_id)
+  end
 end
