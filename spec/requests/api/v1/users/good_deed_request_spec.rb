@@ -38,7 +38,6 @@ RSpec.describe "User good deed request" do
       expect(deed[:data][:id]).to eq(good_deed.id.to_s)
       expect(deed[:data].keys).to eq(keys)
       expect(deed[:data][:attributes].keys).to eq(attribute_keys)
-      # require 'pry'; binding.pry
       expect(deed[:data][:attributes][:attendees]).to be_an(Array)
       expect(deed[:data][:attributes][:attendees].count).to eq(2)
       expect(deed[:data][:attributes][:attendees].first).to be_a(Hash)
