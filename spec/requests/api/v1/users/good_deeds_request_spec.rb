@@ -181,15 +181,14 @@ RSpec.describe "Good Deeds Controller" do
 
       patch "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}", headers:, params: JSON.generate(good_deed_params)
 
-      # patch "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}", headers: headers, params: good_deed_params, as: :json
-      parse = JSON.parse(response.body, symbolize_names: true)
+      parse = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(response).to be_successful
       expect(parse).to be_a(Hash)
-      expect(parse[:status]).to_not eq(previous_status)
-      expect(parse[:status]).to eq("Completed")
-      expect(parse[:name]).to_not eq(previous_name)
-      expect(parse[:name]).to eq("Mow Lawn")
+      expect(parse[:attributes][:status]).to_not eq(previous_status)
+      expect(parse[:attributes][:status]).to eq("Completed")
+      expect(parse[:attributes][:name]).to_not eq(previous_name)
+      expect(parse[:attributes][:name]).to eq("Mow Lawn")
     end
 
     it "can't update when user id invalid" do

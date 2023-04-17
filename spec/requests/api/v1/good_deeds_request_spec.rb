@@ -17,7 +17,7 @@ RSpec.describe "Good Deeds request" do
       expect(deeds[:data].count).to eq(2)
       deeds[:data].each do |deed|
         expect(deed.keys).to eq(keys)
-        expect(deed[:attributes].keys).to eq([:name, :media_link])
+        expect(deed[:attributes].keys).to eq([:name, :media_link, :time, :date])
       end
     end
   end

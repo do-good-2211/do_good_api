@@ -34,7 +34,7 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
     user = User.find(params[:user_id])
     good_deed = user.good_deeds.find(params[:id])
     good_deed.update(good_deed_params)
-    render json: good_deed
+    render json: GoodDeedSerializer.new(good_deed)
   end
 
   private
