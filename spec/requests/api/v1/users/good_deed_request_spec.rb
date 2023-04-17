@@ -42,16 +42,7 @@ RSpec.describe "User good deed request" do
       expect(deed[:data][:attributes][:attendees].count).to eq(2)
       expect(deed[:data][:attributes][:attendees].first).to be_a(Hash)
     end
-
-
-
-
-
-
-
-
-
-
+    
     it "retuns a error if the user or good deed is not found" do
       get "/api/v1/users/1/good_deeds/2"
       deed = JSON.parse(response.body, symbolize_names: true)
