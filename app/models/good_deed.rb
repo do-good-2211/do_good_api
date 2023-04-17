@@ -10,6 +10,7 @@ class GoodDeed < ApplicationRecord
   enum status: { "In Progress" => 0, "Completed" => 1 }
 
   def add_participants(all_invitees, host_id)
+    all_invitees = [] if all_invitees == nil
     all_invitees << host_id
 
     ActiveRecord::Base.transaction do
@@ -22,5 +23,9 @@ class GoodDeed < ApplicationRecord
 
   def self.completed_photo_deeds
     GoodDeed.where("status = 1").where("media_link IS NOT NULL")
+  end
+
+  def attendees 
+    users.where.not(id: self.host_id)
   end
 end
