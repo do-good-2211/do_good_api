@@ -57,7 +57,7 @@ RSpec.describe "User Request Spec" do
         expect(user_parsed).to be_a(Hash)
         expect(user_parsed).to have_key(:data)
         expect(user_parsed[:data].keys).to eq(user_data_keys)
-        expect(user_parsed[:data][:attributes].keys).to eq([:name, :role, :good_deeds])
+        expect(user_parsed[:data][:attributes].keys).to eq([:name, :role, :good_deeds, :email])
         expect(user_parsed[:data][:attributes][:good_deeds]).to be_an(Array)
         expect(user_parsed[:data][:attributes][:good_deeds].count).to eq(0)
       end
