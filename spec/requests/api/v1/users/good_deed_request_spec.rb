@@ -1,17 +1,17 @@
 require "rails_helper"
 
-RSpec.describe "User good deed request" do
+RSpec.describe "User good deed request", type: :request do
   describe "#show" do
     it "retuns a single user good deed" do
       user = create(:user)
-      good_deed1 = create(:good_deed)
+      host = create(:user)
+      good_deed1 = create(:good_deed, host_id: host.id)
       UserGoodDeed.create(user_id: user.id, good_deed_id: good_deed1.id)
       keys = [:id, :type, :attributes]
-      attribute_keys = [:name, :date, :time, :status, :notes, :media_link, :attendees]
+      attribute_keys = [:name, :date, :time, :status, :notes, :media_link, :host_name, :attendees]
 
       get "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}"
       deed = JSON.parse(response.body, symbolize_names: true)
-
       expect(response).to be_successful
       expect(deed).to be_a(Hash)
       expect(deed[:data][:id]).to eq(good_deed1.id.to_s)
@@ -28,7 +28,7 @@ RSpec.describe "User good deed request" do
       udg2 = create(:user_good_deed, user_id: attendee2.id, good_deed_id: good_deed.id)
       udg3 = create(:user_good_deed, user_id: host.id, good_deed_id: good_deed.id)
       keys = [:id, :type, :attributes]
-      attribute_keys = [:name, :date, :time, :status, :notes, :media_link, :attendees]
+      attribute_keys = [:name, :date, :time, :status, :notes, :media_link, :host_name, :attendees]
 
       get "/api/v1/users/#{host.id}/good_deeds/#{good_deed.id}"
       deed = JSON.parse(response.body, symbolize_names: true)
