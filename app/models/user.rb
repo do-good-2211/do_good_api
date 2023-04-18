@@ -9,14 +9,13 @@ class User < ApplicationRecord
   validates :email, :uid, uniqueness: true
   validates :password, confirmation: true
 
-  has_secure_password
-
   enum role: { user: 0, admin: 1 }
 
   def self.from_omniauth(response)
     find_or_create_by(uid: response[:uid], provider: response[:provider]) do |u|
       u.name = response[:info][:name]
       u.email = response[:info][:email]
+      require 'pry'; binding.pry
       u.password = SecureRandom.hex(15)
     end
   end
