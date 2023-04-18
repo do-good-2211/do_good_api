@@ -8,7 +8,7 @@ RSpec.describe "User good deed request", type: :request do
       good_deed1 = create(:good_deed, host_id: host.id)
       UserGoodDeed.create(user_id: user.id, good_deed_id: good_deed1.id)
       keys = [:id, :type, :attributes]
-      attribute_keys = [:name, :date, :time, :status, :notes, :media_link, :host_name, :attendees]
+      attribute_keys = [:name, :date, :time, :status, :notes, :media_link, :host_id, :host_name, :attendees]
 
       get "/api/v1/users/#{user.id}/good_deeds/#{good_deed1.id}"
       deed = JSON.parse(response.body, symbolize_names: true)
@@ -28,7 +28,7 @@ RSpec.describe "User good deed request", type: :request do
       udg2 = create(:user_good_deed, user_id: attendee2.id, good_deed_id: good_deed.id)
       udg3 = create(:user_good_deed, user_id: host.id, good_deed_id: good_deed.id)
       keys = [:id, :type, :attributes]
-      attribute_keys = [:name, :date, :time, :status, :notes, :media_link, :host_name, :attendees]
+      attribute_keys = [:name, :date, :time, :status, :notes, :media_link, :host_id, :host_name, :attendees]
 
       get "/api/v1/users/#{host.id}/good_deeds/#{good_deed.id}"
       deed = JSON.parse(response.body, symbolize_names: true)
