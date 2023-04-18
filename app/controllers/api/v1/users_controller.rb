@@ -12,6 +12,10 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.from_omniauth(params[:query])
-    render json: UsersSerializer.new(user)
+    if user.valid?
+      render json: UsersSerializer.new(user)
+    else
+      render json: ErrorSerializer.new(user.errors.full_messages.join)
+    end
   end
 end

@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(response)
     find_or_create_by(uid: response[:uid], provider: response[:provider]) do |u|
-      u.name = response[:info][:name]
+      u.name = response[:info][:name] || response[:info][:email]
       u.email = response[:info][:email]
       u.password = SecureRandom.hex(15)
     end
