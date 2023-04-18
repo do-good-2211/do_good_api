@@ -89,6 +89,17 @@ RSpec.describe GoodDeed, type: :model do
 
         expect(good_deed.attendees).to eq([attendee1, attendee2])
       end
+
+      it "is the host of the good deed" do 
+        host = create(:user)
+        good_deed = create(:good_deed, host_id: host.id)
+        attendee1 = create(:user)
+        attendee2 = create(:user)
+        udg1 = create(:user_good_deed, user_id: attendee1.id, good_deed_id: good_deed.id)
+        udg2 = create(:user_good_deed, user_id: attendee2.id, good_deed_id: good_deed.id)
+
+        expect(good_deed.host_name).to eq(host.name)
+      end
     end
   end
 end

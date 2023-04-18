@@ -28,4 +28,8 @@ class GoodDeed < ApplicationRecord
   def attendees 
     users.where.not(id: self.host_id)
   end
+
+  def host_name
+    User.find(self.host_id).name
+  end
 end

@@ -57,9 +57,9 @@ RSpec.describe "User Request Spec" do
         expect(user_parsed).to be_a(Hash)
         expect(user_parsed).to have_key(:data)
         expect(user_parsed[:data].keys).to eq(user_data_keys)
-        expect(user_parsed[:data][:attributes].keys).to eq([:name, :role, :good_deeds, :email])
-        expect(user_parsed[:data][:attributes][:good_deeds]).to be_an(Array)
-        expect(user_parsed[:data][:attributes][:good_deeds].count).to eq(0)
+        expect(user_parsed[:data][:attributes].keys).to eq([:name, :role, :email, :good_deeds])
+        expect(user_parsed[:data][:attributes][:good_deeds][:data]).to be_an(Array)
+        expect(user_parsed[:data][:attributes][:good_deeds][:data].count).to eq(0)
       end
 
       it "can be have an array of good deeds" do
@@ -78,10 +78,10 @@ RSpec.describe "User Request Spec" do
 
         user_parsed = JSON.parse(response.body, symbolize_names: true)
 
-        expect(user_parsed[:data][:attributes][:good_deeds]).to be_an(Array)
-        expect(user_parsed[:data][:attributes][:good_deeds].count).to eq(2)
-        expect(user_parsed[:data][:attributes][:good_deeds].first[:name]).to eq(good_deed1.name)
-        expect(user_parsed[:data][:attributes][:good_deeds].second[:name]).to eq(good_deed2.name)
+        expect(user_parsed[:data][:attributes][:good_deeds][:data]).to be_an(Array)
+        expect(user_parsed[:data][:attributes][:good_deeds][:data].count).to eq(2)
+        expect(user_parsed[:data][:attributes][:good_deeds][:data].first[:attributes][:name]).to eq(good_deed1.name)
+        expect(user_parsed[:data][:attributes][:good_deeds][:data].second[:attributes][:name]).to eq(good_deed2.name)
       end
 
       it "renders an error if a user id that doesn't exist is provided in the query" do
@@ -156,6 +156,27 @@ RSpec.describe "User Request Spec" do
         expect(found_user.uid).to eq('100000000000000000000')
         expect(found_user.email).to eq('john@example.com')
         expect(found_user.provider).to eq('google_oauth2')
+      end
+    end
+
+    describe "it can get one user with good deeds" do 
+      it "has more details in the good deeds, having a host name and list of attendees" do
+        host = create(:user)
+        attendee1 = create(:user)
+        good_deed = create(:good_deed, host_id: host.id)
+        udg1 = create(:user_good_deed, user_id: attendee1.id, good_deed_id: good_deed.id)
+        udg2 = create(:user_good_deed, user_id: host.id, good_deed_id: good_deed.id)
+        
+        get "/api/v1/users/#{attendee1.id}"
+
+        expect(response).to be_successful
+
+        user_parsed = JSON.parse(response.body, symbolize_names: true)
+
+        expect(user_parsed[:data][:attributes][:good_deeds][:data]).to be_an(Array)
+        expect(user_parsed[:data][:attributes][:good_deeds][:data].count).to eq(1)
+        expect(user_parsed[:data][:attributes][:good_deeds][:data].first[:attributes][:name]).to eq(good_deed.name)
+        expect(user_parsed[:data][:attributes][:good_deeds][:data].first[:attributes]).to have_key(:host_name)
       end
     end
   end
