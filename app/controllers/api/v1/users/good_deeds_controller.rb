@@ -31,6 +31,7 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:user_id])
     @good_deed = GoodDeed.find(params[:id])
 
     @good_deed.assign_attributes(good_deed_params)
