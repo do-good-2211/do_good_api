@@ -4,6 +4,6 @@ class UserNotifierMailer < ApplicationMailer
   def send_completed_deed_email(user)
     @user = user
     mail( :to => @user.email,
-          :subject => 'You did some good; way to go!')
+          :subject => 'You did some good!')
   end
 end
