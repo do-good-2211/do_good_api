@@ -31,16 +31,17 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:user_id])
-    @good_deed = @user.good_deeds.find(params[:id])
-    @good_deed.update!(good_deed_params)
-    render json: GoodDeedSerializer.new(@good_deed)
+    @good_deed = GoodDeed.find(params[:id])
 
-    if @good_deed.status == "Completed"
+    @good_deed.assign_attributes(good_deed_params)
+    if @good_deed.status_changed?
       @good_deed.users.each do |user|
         UserNotifierMailer.send_completed_deed_email(user).deliver_now
       end
     end
+
+    @good_deed.update!(good_deed_params)
+    render json: GoodDeedSerializer.new(@good_deed)
   end
 
   private
