@@ -238,7 +238,7 @@ RSpec.describe "Good Deeds Controller" do
       parse = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(404)
-      expect(parse[:errors][0][:detail].first).to eq("Couldn't find GoodDeed with 'id'=zxvsd46546 [WHERE \"user_good_deeds\".\"user_id\" = $1]")
+      expect(parse[:errors][0][:detail].first).to eq("Couldn't find GoodDeed with 'id'=zxvsd46546")
     end
   end
 end
