@@ -15,6 +15,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  # delete "/api/v1/users/:user_id/good_deeds/:id", to: "users/good_deeds#destroy"
 end
