@@ -1,9 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe BoredFacade do
-  describe "instance methods", :vcr do
-    context "#initialize" do
-      it "exists and creates an instance of bored service" do
+  describe 'instance methods', :vcr do
+    context '#initialize' do
+      it 'exists and creates an instance of bored service' do
         bored_facade = BoredFacade.new
 
         expect(bored_facade).to be_a(BoredFacade)
@@ -11,8 +11,8 @@ RSpec.describe BoredFacade do
       end
     end
 
-    context "#three_random_acts" do
-      it "returns an array of 3 random act objects" do
+    context '#three_random_acts' do
+      it 'returns an array of 3 random act objects' do
         bored_facade = BoredFacade.new
 
         expect(bored_facade.three_random_acts).to be_a(RandomAct)

@@ -10,6 +10,6 @@ class BoredService
   private
 
   def conn
-    Faraday.new(url: "http://www.boredapi.com/api/activity?type=charity")
+    Faraday.new(url: 'http://www.boredapi.com/api/activity?type=charity')
   end
 end

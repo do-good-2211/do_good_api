@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "User Request Spec" do
-  describe "users request" do
+RSpec.describe 'User Request Spec' do
+  describe 'users request' do
     describe 'Get all users' do
-      it "can get a list of users" do
+      it 'can get a list of users' do
         create_list(:user, 3)
-        user_data_keys = [:id, :type, :attributes]
+        user_data_keys = %i[id type attributes]
 
-        get "/api/v1/users"
+        get '/api/v1/users'
 
         expect(response).to be_successful
 
@@ -21,7 +21,7 @@ RSpec.describe "User Request Spec" do
         users[:data].each do |user|
           expect(user.keys).to eq(user_data_keys)
           expect(user[:id].to_i).to be_an(Integer)
-          expect(user[:type]).to eq("users")
+          expect(user[:type]).to eq('users')
           expect(user).to have_key(:attributes)
           expect(user[:attributes]).to be_a(Hash)
           expect(user[:attributes]).to have_key(:name)
@@ -29,8 +29,8 @@ RSpec.describe "User Request Spec" do
         end
       end
 
-      it "returns empty data when no users are in the system" do
-        get "/api/v1/users"
+      it 'returns empty data when no users are in the system' do
+        get '/api/v1/users'
 
         expect(response).to be_successful
 
@@ -43,10 +43,10 @@ RSpec.describe "User Request Spec" do
       end
     end
 
-    describe "Get one user" do
-      it "can get one user from an id" do
+    describe 'Get one user' do
+      it 'can get one user from an id' do
         user = create(:user, id: 1111)
-        user_data_keys = [:id, :type, :attributes]
+        user_data_keys = %i[id type attributes]
 
         get "/api/v1/users/#{user.id}"
 
@@ -57,12 +57,12 @@ RSpec.describe "User Request Spec" do
         expect(user_parsed).to be_a(Hash)
         expect(user_parsed).to have_key(:data)
         expect(user_parsed[:data].keys).to eq(user_data_keys)
-        expect(user_parsed[:data][:attributes].keys).to eq([:name, :role, :email, :good_deeds])
+        expect(user_parsed[:data][:attributes].keys).to eq(%i[name role email good_deeds])
         expect(user_parsed[:data][:attributes][:good_deeds][:data]).to be_an(Array)
         expect(user_parsed[:data][:attributes][:good_deeds][:data].count).to eq(0)
       end
 
-      it "can be have an array of good deeds" do
+      it 'can be have an array of good deeds' do
         user = create(:user, uid: 1111)
         host = create(:user, uid: 1234)
         good_deed1 = create(:good_deed, host_id: host.id)
@@ -85,7 +85,7 @@ RSpec.describe "User Request Spec" do
       end
 
       it "renders an error if a user id that doesn't exist is provided in the query" do
-        get "/api/v1/users/900000000"
+        get '/api/v1/users/900000000'
 
         expect(response.status).to eq(404)
 
@@ -95,8 +95,8 @@ RSpec.describe "User Request Spec" do
                                        "errors":
                                        [
                                          {
-                                           "status": "404",
-                                           "title": "Invalid Request",
+                                           "status": '404',
+                                           "title": 'Invalid Request',
                                            "detail":
                                              [
                                                "Couldn't find User with 'id'=900000000"
@@ -111,16 +111,16 @@ RSpec.describe "User Request Spec" do
       before(:each) do
         @user_params = {
           query: {
-            provider: "google_oauth2",
-            uid: "100000000000000000000",
+            provider: 'google_oauth2',
+            uid: '100000000000000000000',
             info: {
-              name: "John Smith",
-              email: "john@example.com",
-              first_name: "John",
-              last_name: "Smith",
-              image: "https://lh4.googleusercontent.com/photo.jpg",
+              name: 'John Smith',
+              email: 'john@example.com',
+              first_name: 'John',
+              last_name: 'Smith',
+              image: 'https://lh4.googleusercontent.com/photo.jpg',
               urls: {
-                google: "https://plus.google.com/+JohnSmith"
+                google: 'https://plus.google.com/+JohnSmith'
               }
             }
           }
@@ -141,7 +141,6 @@ RSpec.describe "User Request Spec" do
       end
 
       it 'finds an existing user' do
-
         headers = { 'CONTENT_TYPE' => 'application/json' }
 
         # # POST request to create the user
@@ -159,14 +158,14 @@ RSpec.describe "User Request Spec" do
       end
     end
 
-    describe "it can get one user with good deeds" do 
-      it "has more details in the good deeds, having a host name and list of attendees" do
+    describe 'it can get one user with good deeds' do
+      it 'has more details in the good deeds, having a host name and list of attendees' do
         host = create(:user)
         attendee1 = create(:user)
         good_deed = create(:good_deed, host_id: host.id)
         udg1 = create(:user_good_deed, user_id: attendee1.id, good_deed_id: good_deed.id)
         udg2 = create(:user_good_deed, user_id: host.id, good_deed_id: good_deed.id)
-        
+
         get "/api/v1/users/#{attendee1.id}"
 
         expect(response).to be_successful

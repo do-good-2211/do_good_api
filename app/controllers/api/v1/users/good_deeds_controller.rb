@@ -9,7 +9,7 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
     return unless new_good_deed.save!
 
     new_good_deed.add_participants(params[:attendees], params[:user_id].to_i)
-    render json: GoodDeedsCreateSerializer.new(new_good_deed), status: 201
+    render json: GoodDeedsCreateSerializer.new(new_good_deed), status: :created
   end
 
   def destroy
@@ -20,9 +20,9 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
 
   def check_deed_status
     @deed = GoodDeed.find(params[:id])
-    return unless @deed.status == "Completed"
+    return unless @deed.status == 'Completed'
 
-    render json: ErrorSerializer.new("Completed good deed cannot be deleted").invalid_request, status: 404
+    render json: ErrorSerializer.new('Completed good deed cannot be deleted').invalid_request, status: :not_found
   end
 
   def show
