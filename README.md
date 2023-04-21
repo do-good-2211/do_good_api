@@ -400,7 +400,7 @@ Status: 204
   </pre>
 </details><br>
 
-View these endpoints in [Postman](https://www.postman.com/karajoho/workspace/be-do-good-api/collection/26295772-25edb5bb-c341-46d3-8372-66b0f2a7b3b1?action=share&creator=26295772)
+View these endpoints in [Postman](https://app.getpostman.com/join-team?invite_code=530cc87f83e39fc33d0b31756e64228b&target_code=46ce1dd075e9af2cbe5c40edbe90e231)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
