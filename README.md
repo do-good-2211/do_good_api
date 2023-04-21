@@ -1,3 +1,4 @@
+
 <!-- ReadMe -->
 <a id="readme-top"></a>
 
@@ -397,7 +398,9 @@ Response:
 Status: 204
     </code>
   </pre>
-</details>
+</details><br>
+
+View these endpoints in [Postman](https://www.postman.com/karajoho/workspace/be-do-good-api/collection/26295772-25edb5bb-c341-46d3-8372-66b0f2a7b3b1?action=share&creator=26295772)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -415,13 +418,29 @@ Status: 204
 
 [Google Cloud Platform](https://cloud.google.com/) was used to allow users to sign in with their Google account.
 
+<details>
+  <summary><img src="https://www.loginradius.com/blog/static/a9dad0fc4bf1af95243aa5e2d017bc22/a8669/google_cover.jpg" style="width:43px; height:33px;" > <strong>Google OAuth</strong></summary><br>
+  <p>Signing in to the Do Good app is made simple by allowing users to sign in with Google. </p>
+  
+  More information on the gem used for this(`omniauth-google-oauth2`) can be found [here](https://github.com/zquestz/omniauth-google-oauth2)
+</details>
+<br>
+
 [Amazon Web Services](https://aws.amazon.com/) was used to allow users to upload photos for their completed good deeds.
+
+<details>
+  <summary><img src= "https://logos-world.net/wp-content/uploads/2021/08/Amazon-Web-Services-AWS-Logo.png" style="width:60px; height:40px;"><strong>Amazon S3 Cloud Object Storage</strong></summary><br>
+  <p>By including amazon's web serfice for storage, we can allow users to upload their pictures which are then saved as objects in a "bucket".  </p>
+
+  More information on the gem used for this(`aws-sdk-s3`) can be found [here](https://github.com/aws/aws-sdk-ruby)
+</details>
+<br>
 
 [Twilio SendGrid](https://sendgrid.com/) was used to send an email to the user after they create a good deed
 
 <details>
   <summary><img src="https://sendgrid.com/brand/sg-twilio/SG_Twilio_Lockup_RGB-WHT-Textx2.png" height="23"><strong> Email Service</strong></summary><br>
-    <p>Users will receive a message</p>
+    <p>The host and attendees will receive an email upon the completion of a good deed.</p>
 
 </details><br>
 
@@ -430,28 +449,20 @@ Status: 204
 <!-- Future Iterations -->
 
 <h2 id="refactor">Future Iterations</h2>
-<!-- <li></li>
-<li></li> -->
-
-<dl>
-  <dt>Idea 1</dt>
-    <dd>- Stuff bit 1</dd>
-    <dd>- Stuff bit 2</dd>
-  <dt>Idea 2</dt>
-    <dd>- Stuff bit 1</dd>
-    <dd>- Stuff bit 2</dd>
-</dl>
+<details>
+  <summary>Rafactor/Changes</summary>
+  <dl>
+    <dt>Pull other APIs</dt>
+      <dd>- Locally available volunteer opportunities</dd>
+    <dt>Refactor Serializers</dt>
+      <dd>- Specifcally the good deeds serializers</dd>
+  </dl>
+</details>
 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-
-
-<!-- CONTACT -->
-<!-- ## Contributors -->
 <h2 id="contact">Contributors</h2>
 
 
