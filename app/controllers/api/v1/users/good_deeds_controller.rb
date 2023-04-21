@@ -33,17 +33,16 @@ class Api::V1::Users::GoodDeedsController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @good_deed = GoodDeed.find(params[:id])
-    new_params = good_deed_params
-    new_params[:status] = params[:deed_status]
-
-    @good_deed.assign_attributes(new_params)
+    
+    # NOTICE: Only 100 emails allowed per day with free version of SendGrid!
+    @good_deed.assign_attributes(good_deed_params)
     if @good_deed.status_changed?
       @good_deed.users.each do |user|
         UserNotifierMailer.send_completed_deed_email(user).deliver_now
       end
     end
 
-    @good_deed.update!(new_params)
+    @good_deed.update!(good_deed_params)
     render json: GoodDeedSerializer.new(@good_deed)
   end
 
