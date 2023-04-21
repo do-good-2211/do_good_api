@@ -172,7 +172,7 @@ RSpec.describe 'Good Deeds Controller' do
         date: '02-02-2024',
         time: '16:00',
         notes: 'Stuff and things',
-        deed_status: 'Completed',
+        status: 'Completed',
         media_links: 'picture.jpg',
         host_id: user.id,
         attendees: []
