@@ -6,7 +6,7 @@ class GoodDeedSerializer
     object.host_name
   end
 
-  attributes :attendees do |object| 
+  attributes :attendees do |object|
     object.attendees
   end
 end
