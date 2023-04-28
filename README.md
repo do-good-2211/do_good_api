@@ -400,7 +400,7 @@ Status: 204
   </pre>
 </details><br>
 
-View these endpoints in [Postman](https://app.getpostman.com/join-team?invite_code=530cc87f83e39fc33d0b31756e64228b&target_code=46ce1dd075e9af2cbe5c40edbe90e231)
+View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/26295772-25edb5bb-c341-46d3-8372-66b0f2a7b3b1?action=collection%2Ffork&collection-url=entityId%3D26295772-25edb5bb-c341-46d3-8372-66b0f2a7b3b1%26entityType%3Dcollection%26workspaceId%3Db1c61f73-918d-433d-aacd-292fd217aa94)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
