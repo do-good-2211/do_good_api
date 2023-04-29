@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/do-good-2211/do_good_api">
-    <img src=".github/do_good.jpg" alt="Logo" width="150" height="150">
+    <img src="https://user-images.githubusercontent.com/114951691/235326875-1f1dbce0-64fe-46fc-a3f1-ff4cca0fb21e.png" alt="Logo" width="150" height="150">
   </a>
 
 <h3 align="center">Welcome to Do Good</h3>
@@ -450,7 +450,7 @@ View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 
 <h2 id="refactor">Future Iterations</h2>
 <details>
-  <summary>Rafactor/Changes</summary>
+  <summary>Refactor/Changes</summary>
   <dl>
     <dt>Pull other APIs</dt>
       <dd>- Locally available volunteer opportunities</dd>
