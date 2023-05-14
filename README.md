@@ -226,7 +226,7 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
 
 <details>
   <summary><code>GET "/api/v1/users/:user_id"</code></summary>
-  Response
+  Response:
   <pre>
     <code>
   {
@@ -430,7 +430,7 @@ View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 
 <details>
   <summary><img src= "https://logos-world.net/wp-content/uploads/2021/08/Amazon-Web-Services-AWS-Logo.png" style="width:60px; height:40px;"><strong>Amazon S3 Cloud Object Storage</strong></summary><br>
-  <p>By including amazon's web serfice for storage, we can allow users to upload their pictures which are then saved as objects in a "bucket".  </p>
+  <p>By including amazon's web service for storage, we can allow users to upload their pictures which are then saved as objects in a "bucket".  </p>
 
   More information on the gem used for this(`aws-sdk-s3`) can be found [here](https://github.com/aws/aws-sdk-ruby)
 </details>
